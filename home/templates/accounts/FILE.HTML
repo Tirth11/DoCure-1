@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    {% load  static %}
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+ 
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+  <!--Font awesome link-->
+  
+
+
+  <!--Font awesome link-->
+  
+
+
+</head>
+
+    
+    
+   
+
+
+<nav class="navbar navbar-expand-lg navbar-light  sticky-top" style="background-color: # FF66FF">
+  <a class="navbar-brand" <a href="{% url 'home' %}"><img src='{% static 'images/Logo.jpeg' %}' width="150"
+    height="60"></a>
+</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" style="color: black" <a href="{% url 'home' %}">Home <span
+            class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active" style="padding: 5px; width: 100px;">
+        <a class="nav-link btn btn-outline-primary btn-sm" style="color: black" role="button"<a href="{% url 'login' %}">LogIn
+          <span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item" style="padding: 5px; width: 100px;">
+        <a class="nav-link btn btn-outline-primary btn-sm  "role="button" style="color: black" <a href="{% url 'register' %}">SignUp
+          <span class="sr-only"></span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+ 
+
+		
+<div>
+
+	
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="jk">
+        <div class="container">
+          <div class="row">
+        
+            <div class="column">
+          <div class="first-box">
+            <div class="wrapper">
+                        <div class="image">
+                            <img src='{% static 'images/pdf.png' %}' class="logo">
+                        </div>
+                        <div class="content">
+                            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>  
+                           
+                        </div>
+                        <div id="cancel-btn"><i class="fas fa-times"></i></div>
+                     
+                    </div>
+                    <input type="file" name="document"><br>
+                    <br><br>
+                    <button type="submit" >Upload file</button>
+                   
+                    
+                </div>
+          </div>
+        </form>
+        {% if url %}
+        <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+      {% endif %}
+   
+    
+      &nbsp
+      &nbsp
+       &nbsp
+      &nbsp
+       &nbsp
+      &nbsp
+       &nbsp
+      &nbsp
+       &nbsp
+      &nbsp
+     
+ <form>
+  <div class="second-box">
+    <div class="row">
+    <div class="container">
+
+    <div class="column">
+      <div class="wrapper">
+      <p>
+                    <div class="image">
+                        <img src='{% static 'images/image.jpg' %}' alt=""> 
+                    </div>
+                    <div class="content">
+                        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>  
+                        
+                    </div>
+                    <div id="cancel-btn"><i class="fas fa-times"></i></div>
+                   
+                </div>
+                <input type="file" name="document">
+                <br>
+          <br>
+                <button type="submit" >Upload file</button>
+            </p>
+  </div>
+</div>
+
+  </form>
+  {% if urls %}
+        <p>Uploaded file: <a href="{{ urls }}">{{ urls }}</a></p>
+      {% endif %}
+    {% endblock %} 
+
+  
+  

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
+
+  
+
+
+  <!--Font awesome link-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>SignUp</title>
+</head>
+
+<body>
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="background-color: #c5cfcf70">
+    <a class="navbar-brand" href=""><img src="" width="40"
+        height="40"></a>
+    <a class="navbar-brand" style="color: black"<a href="{% url 'home' %}">DoCure</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" style="color: black" <a href="{% url 'home' %}">Home <span
+              class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item active" style="padding: 5px; width: 100px;">
+          <a class="nav-link btn btn-outline-primary btn-sm" style="color: black" role="button" <a href="{% url 'login' %}">LogIn
+            <span class="sr-only"></span></a>
+        </li>
+
+        <li class="nav-item" style="padding: 5px; width: 100px;">
+          <a class="nav-link btn btn-outline-primary btn-sm active " style="color: black" <a href="{% url 'register' %}">SignUp
+            <span class="sr-only"></span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- signUp-Modal-->
+  <div class="container-sm">
+    <div class="dialog">
+      <div class="content">
+        <div class="header">
+          <h3 class="title">Get a Account</h3>
+        </div>
+        <div class="body">
+          <form  action='/register/' method="post">
+		  {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" name='name' class="form-control" id="name" placeholder="What do we call you?">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" name='email' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                else.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="integer" name='age' class="form-control" id="age" placeholder="Eg. 25" >
+            </div>
+            <div>
+            <label for="gender"> Select you gender</label>
+<select name="gender">
+	<option value="none" selected>Gender</option>
+	<option value="male">Male</option>
+	<option value="female">Female</option>
+	<option value="other">other</option>
+</select>
+</div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label><br>
+              <input type="password" name='password' class="form-control" id="password1" /><br />
+            </div>
+            {% comment %} <div class="form-group">
+              <label for="exampleInputPassword1">Confirm your Password</label><br>
+              <input type="password" name='password2' class="form-control" id="password2" /><br />
+            </div> {% endcomment %}
+            
+            <div style="text-align: center;">
+            <input type="hidden" name="s">
+              <input type="submit" value="Submit">
+            </div>
+            <br>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--footer-->
+  <footer class="page-footer font-small stylish-color-dark pt-4">
+
+    <!-- Call to action -->
+
+    <!-- Call to action -->
+
+    <!-- Social buttons -->
+    <footer>
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+          © 2021 Copyright:
+          <a href="#"> DoCure.com</a>
+      </div>
+      <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+  </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+html,body
+  {
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+      overflow-x: hidden; 
+  }
+
+
+.container-sm{
+  width: 30%; 
+  background-color: rgb(90, 97, 194); 
+  margin-top: 20px;
+}
+
+.dialog{
+  padding: 5%;
+}
+
+h2{
+  text-align: center;
+  font-size: small;
+}
+
+.fb{
+  width: 22px;
+  align-items: center;
+}
+.LinkedIn{
+  width: 20px;
+  align-items: center;
+}
+.google{
+  width: 25px;
+  align-items: center;
+}
+
+.fa {
+  padding: 20px;
+  font-size: 20px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3b5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55acee;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.cont
+{
+  text-align: center;
+}
+
+  @media screen and (max-width: 1055px){
+    .container-sm{
+      width: 40%; 
+      background-color: rgb(238, 236, 229); 
+      margin-top: 20px;
+    }
+
+    .dialog{
+      padding: 5%;
+    }
+  }
+
+@media screen and (max-width: 768px){
+  .container-sm{
+    width: 50%; 
+    background-color: rgb(238, 236, 229); 
+    margin-top: 20px;
+  }
+
+  .dialog{
+    padding: 5%;
+  }
+}
+
+  @media screen and (max-width: 560px){
+    .container-sm{
+      width: 100%; 
+      background-color: rgb(238, 236, 229); 
+      margin-top: 20px;
+    }
+
+    .dialog{
+      padding: 5%;
+    }
+  }

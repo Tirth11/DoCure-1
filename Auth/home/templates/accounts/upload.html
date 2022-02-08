@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+ 
+
+
+
+
+  <!--Font awesome link-->
+  
+
+
+    <link rel="stylesheet" href="styleU.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <!-- Navbar content -->
+      </nav>
+      
+      <nav class="navbar navbar-dark bg-primary">
+        <!-- Navbar content -->
+      </nav>
+      
+      <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <!-- Navbar content -->
+      </nav>
+ 
+ 
+<div class="jk">
+<div class="container">
+  <div class="row">
+
+    <div class="column">
+  <div class="first-box">
+    <div class="wrapper">
+                <div class="image">
+                    <img src="image.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>  
+                   
+                </div>
+                <div id="cancel-btn"><i class="fas fa-times"></i></div>
+             
+            </div>
+            <input id="default-btn" type="file" hidden>
+            <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button><br>
+
+            <form>
+            <label for="pwd">If the PDF has password please enter here or Ignore:</label><br>
+            <input type="password" id="pwd" name="pwd" value=""><br>
+            </form>
+        </div>
+  </div>
+  &nbsp
+    &nbsp
+     &nbsp
+    &nbsp
+     &nbsp
+    &nbsp
+     &nbsp
+    &nbsp
+     &nbsp
+    &nbsp
+    
+     
+
+  <div class="second-box">
+    <div class="row">
+    <div class="container">
+
+    <div class="column">
+      <div class="wrapper">
+      <p>
+                    <div class="image">
+                        <img src="pdf.png" alt=""> 
+                    </div>
+                    <div class="content">
+                        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>  
+                        
+                    </div>
+                    <div id="cancel-btn"><i class="fas fa-times"></i></div>
+                   
+                </div>
+                <input id="default-btn" type="file" hidden>
+                <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
+            </div>
+            </p>
+  </div>
+</div>
+
+ 
+ <script>
+        const wrapper= document.querySelector(".wrapper");
+        const fileName= document.querySelector(".file-name");
+        const cancelBtn= document.querySelector("#cancel-btn");
+        const defaultBtn= document.querySelector("#default-btn");
+        const customBtn= document.querySelector("#custom-btn");
+        const img=document.querySelector("img");
+        let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\%\+\~\_\.]+$/;
+        function defaultBtnActive(){
+            defaultBtn.click();
+        }
+        defaultBtn.addEventListener("change", function(){
+            const file= this.files[0];
+            if(file){
+                const reader= new FileReader();
+                reader.onload =function(){
+                const result= reader.result;
+                img.src= result;
+                wrapper.classList.add("active");
+            }
+            cancelBtn.addEventListener("click",function(){
+                img.src= "";
+                wrapper.classList.remove("active");
+            });
+            reader.readAsDataURL(file);
+            }
+            if(this.value){
+                let valueStore = this.value.match(regExp);
+                fileName.textContent=valueStore;
+            }
+        });
+    </script>
+</div>
+
+</body>
+</html>
