@@ -22,7 +22,7 @@
 
 <body>
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-light  sticky-top" style="background-color: #	FF66FF">
+  <nav class="navbar navbar-expand-lg navbar-light  sticky-top" style="background-color: #  FF66FF">
     <a class="navbar-brand" <a href="{% url 'home' %}"><img src='{% static 'images/Logo.jpeg' %}' width="120"
       height="60"></a>
 
@@ -54,7 +54,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
   *{
-    margin: ;
+    /* margin: ; */
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
@@ -69,11 +69,11 @@
   }
   .center{
     position: absolute;
-    top: 80%;
+    top: 40%;
     margin-top:150px;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 450px;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
@@ -126,6 +126,19 @@
   .signup_link a:hover{
     text-decoration: underline;
   }
+
+
+
+div.scroll {
+ 
+ 
+ 
+  width: 400px;
+  height: 550px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align:justify;
+}
 </style>
 </div>
 </div>
@@ -137,20 +150,18 @@
         <form method="post">
           {% csrf_token %}
           <h1>Register</h1>
-	                    	{{ register_form|crispy}}     
+          <div class="scroll">
+                        {{ register_form|crispy}}     
                          
                         <input type="submit" value="Login">
                         <div class="signup_link">
                           Not a member? <a href="/register/">Signup</a>
                         </div>
-	</form>
+  </form>
 
 </div>
             
-        
-
-
-
+  
 
 </body>
 

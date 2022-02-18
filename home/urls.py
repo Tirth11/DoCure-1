@@ -12,7 +12,7 @@ urlpatterns = [
 	# path('sign/', views.sign, name="sign"),
 	path('home/', views.home, name="home"),
 	path('logout/',views.logout_view,name='logout'),
- path('about/',views.about,name='about'),
+    path('about/',views.about,name='about'),
  	path('FILE/',views.FILE,name='FILE'),
 
 

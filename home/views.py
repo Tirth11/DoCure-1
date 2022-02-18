@@ -31,7 +31,8 @@ def about(request):
 	return render(request,'accounts/about.html')
 
 def dashboard(request):
-	return render(request,'accounts/dashboard.html')
+    all_reports= Cbc.objects.all
+    return render(request,'accounts/dashboard.html',{'all':all_reports})
 
 # def sign(request):
     	
