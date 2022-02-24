@@ -14,8 +14,8 @@
 		.container{
 			width:100%;
 			height: 100vh;
-			background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0,0,0,0.7)),url("{% static 'images/background.jpg' %}");
-			background-position: center;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0,0,0,0.7)),url("{% static 'images/BG.jpg' %}");
+			background-size: cover;
 			background-size: cover;
 			padding-left: 8%;
 			padding-right: 8%;
@@ -115,13 +115,13 @@
 			<a class="navbar-brand" <a href="{% url 'home' %}"><img src='{% static 'images/Logo.jpeg' %}' width="120"
 				height="60"></a>
 		   
-			  {% if user.is_authenticated %}
+			{% if user.is_authenticated %}
 			{% csrf_token %}
 			<nav>
 				<ul>
 					<li><a href="">HOME</a></li>
-					<li><a href="">DASHBOARD</a></li>
-					<li><a  href="/FILE/">Upload</></li>
+					<li><a href="/dashboard/">DASHBOARD</a></li>
+					<li><a  href="/FILE/">Upload</a></li>
 					
 					<li style="color:white">{{name}}</li>
 					<li><a  href="/logout/">Logout</a></li>
@@ -147,7 +147,7 @@
 					<p>Start uploading your medical reports.</p>
 				</div>
 				<div class="card card2">
-					<h5>Check Dashboard</h5>
+					<h5><a href="/dashboard/" style='color:white'>Check Dashboard</h5>
 					<p>See your previous reports along with your profile here.</p>
 				</div>
 				<div class="card card3">

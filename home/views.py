@@ -1,8 +1,11 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
+
 from django.contrib.auth import authenticate, login, logout
-from .models import User
+from matplotlib.pyplot import rcdefaults
+
 from .forms  import NewUserForm
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, CreateView
@@ -17,6 +20,8 @@ import re
 # import requests
 import pdfplumber
 import pandas as pd
+import pytesseract
+from PIL import Image
 
 
 # Create your views here.
@@ -27,22 +32,13 @@ def home(request):
 	name=request.user.username or None
 	return render(request,'accounts/home.html',{'name':name})
 
+def homebefore(request):
+    	return render(request,'accounts/homebefore.html')
+
 def about(request):
 	return render(request,'accounts/about.html')
 
-def dashboard(request):
-    all_reports= Cbc.objects.all
-    return render(request,'accounts/dashboard.html',{'all':all_reports})
 
-# def sign(request):
-    	
-
-# 			if request.method == 'POST':
-# 				age=request.POST['age']
-# 				gender=request.POST['gender']
-# 				ins=Contact(age=age,gender=gender)
-# 				ins.save()
-# 				return render(request, 'accounts/login.html')
 
 def registerPage(request):
 	if request.method == "POST":
@@ -51,7 +47,9 @@ def registerPage(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
+           
 			return redirect("login")
+
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
 	return render(request,context={'register_form':form} ,template_name='accounts/register.html')
@@ -84,80 +82,80 @@ def extract(text):
         wbc = float(wbc.replace(',',''))
         if(wbc>1000 and wbc<100000):
             wbc /= 1000
-    else:
-        wbc = "Not Available"
+    elif(wbc==None):
+        wbc = 0.00000000000000
         flag += 1
         
     rbc = rbc_re.search(text)
     if(rbc != None):
         rbc = rbc_re.search(text).group(2)
         rbc = float(rbc.replace(',',''))
-    else:
-        rbc = "Not Available"
+    elif(rbc==None):
+        rbc = 0.0000000000000
         flag += 1
         
     hgb = hgb_re.search(text)
     if(hgb != None):
         hgb = hgb_re.search(text).group(2)
         hgb = float(hgb.replace(',',''))
-    else:
-        hgb = "Not Available"
+    elif(hgb==None):
+        hgb = 0.00000000000000
         flag += 1
         
     pcv = pcv_re.search(text)
     if(pcv != None):
         pcv = pcv_re.search(text).group(2)
         pcv = float(pcv.replace(',',''))
-    else:
-        pcv = "Not Available"
+    elif(pcv==None):
+        pcv = NULL
         flag += 1
         
     mcv = mcv_re.search(text)
     if(mcv != None):
         mcv = mcv_re.search(text).group(2)
         mcv = float(mcv.replace(',',''))
-    else:
-        mcv = "Not Available"
+    elif(mcv==None):
+        mcv = 0.00000000000
         flag += 1
         
     mch = mch_re.search(text)
     if(mch != None):
         mch = mch_re.search(text).group(2)
         mch = float(mch.replace(',',''))
-    else:
-        mch = "Not Available"
+    elif(mch==None):
+        mch = 0.0000000000
         flag += 1
         
     mchc = mchc_re.search(text)
     if(mchc != None):
         mchc = mchc_re.search(text).group(2)
         mchc = float(mchc.replace(',',''))
-    else:
-        mchc = "Not Available"
+    elif(mchc==None):
+        mchc = 0.000000000
         flag += 1
         
     rcd = rcd_re.search(text)
     if(rcd != None):
         rcd = rcd_re.search(text).group(2)
         rcd = float(rcd.replace(',',''))
-    else:
-        rcd = "Not Available"
+    elif(rcd==None):
+        rcd = 0.0000000
         flag += 1
         
     pc = pc_re.search(text)
     if(pc != None):
         pc = pc_re.search(text).group(2)
         pc = float(pc.replace(',',''))
-    else:
-        pc = "Not Available"
+    elif(pc==None):
+        pc = 0.00000000000
         flag += 1
         
     mpv = mpv_re.search(text)
     if(mpv != None):
         mpv = mpv_re.search(text).group(2)
         mpv = float(mpv.replace(',',''))
-    else:
-        mpv = "Not Available"
+    elif(mpv==None):
+        mpv = 0.0000000000000
         flag += 1
         
     if(flag > 5):
@@ -173,7 +171,7 @@ def extract(text):
         print("Platelet Count: ", pc)
         print("Mean Platelet Volume: ", mpv)
 
-    return rbc, wbc, pc
+    return rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv
 
         
 
@@ -184,31 +182,79 @@ def GetInfo(path):
     with pdfplumber.open(cbc, password='9821714272') as pdf:
         page = pdf.pages[0]
         text = page.extract_text()
-    rbc, wbc, pc = extract(text)
-    return rbc, wbc, pc
+    rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv = extract(text)
+    return rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv
+
+def dashboard(request):
+    context={}
+    
+    name=request.user.username or None
+    all_reports= Cbc.objects.get(user=request.user)
+    return render(request,'accounts/dashboard.html',context={'name':name,'all_report':all_reports})
+
+
+
+
+def GetInfoOCR(path):
+    cbc = path
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\tirth\AppData\Local\Programs\Tesseract-OCR\tesseract.exe' #enter your path here
+    text = pytesseract.image_to_string(Image.open(cbc))
+
+    print(text)
+    rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv= extract(text)
+    return rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv
+
 
 
 def FILE(request):
+    name=request.user.username or None
     context = {}
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
+        print(type(uploaded_file.name))
         context['url'] = fs.url(name)
+        
         print(uploaded_file)
-        rbc, wbc, pc = GetInfo(uploaded_file)
-        user = request.user.get_username()
+        if(uploaded_file.name.endswith(".pdf")):
+            rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv = GetInfo(uploaded_file)
+            user = request.user.get_username()
 
-        cbc = Cbc()
-        cbc.user = request.user
-        cbc.rbc = rbc
-        cbc.wbc = wbc
-        cbc.pc = pc
-        cbc.save()
+            cbc = Cbc()
+            cbc.user = request.user
+            cbc.rbc = rbc
+            cbc.wbc = wbc
+            cbc.pc = pc
+            cbc.hgb= hgb
+            cbc.rcd= rcd
+            cbc.mchc= mchc
+            cbc.mpv= mpv
+            cbc.pcv= pcv
+            cbc.mcv= mcv
+            cbc.save()
+        elif(uploaded_file.name.lower().endswith(('.png', '.jpg', '.jpeg'))):
+            rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv = GetInfoOCR(uploaded_file)
+            user = request.user.get_username()
+
+            cbc = Cbc()
+            cbc.user = request.user
+            cbc.rbc = rbc
+            cbc.wbc = wbc
+            cbc.pc = pc
+            cbc.hgb= hgb
+            cbc.rcd= rcd
+            cbc.mchc= mchc
+            cbc.mpv= mpv
+            cbc.pcv= pcv
+            cbc.mcv= mcv
+            cbc.save()
+            
+            
 
         
 
-    return render(request, 'accounts/FILE.html', context)
+    return render(request, 'accounts/FILE.html', {'name':name})
 
 
 def loginPage(request):

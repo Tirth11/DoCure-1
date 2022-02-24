@@ -1,14 +1,27 @@
 <!Doctype HTML>
+{% load static %}
 <html>
 <head>
 	<title>Dashboard</title>
-	
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Required css files -->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/css/styleDash.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <!--Font awesome link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Required js files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
 <body>
-	
+
 	<div id="mySidenav" class="sidenav">
 	<p class="logo">DoCure</p>
   <a href="dashboard.html" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
@@ -18,6 +31,7 @@
 
 </div>
 <div id="main">
+	
 
 	<div class="head">
 		<div class="col-div-6">
@@ -25,117 +39,197 @@
 <span style="font-size:30px;cursor:pointer; color: white;" class="nav2"  >&#9776; Dashboard</span>
 </div>
 	
-	<div class="col-div-6">
+	<div class="col-div-5">
 	<div class="profile">
-
-		<img src="images/user.png" class="pro-img" />
-		<p>Anushka Darade </p>
+		<p>{{name}}</p>
+		<p><a  href="/logout/">Logout</a></p>
 	</div>
 </div>
 	<div class="clearfix"></div>
-</div>
+</div> 
 
-	<div class="clearfix"></div>
-	<br/>
-	
-	<div class="col-div-3">
-		<div class="box">
-      {% for item in all %}
-        <p>{{ item.wbc }}</p>
-      {% endfor %} 
-			<p><span>WBC</span></p>
-			<i class="fa fa-heart-o box-icon"></i>
-		</div>
-	</div>
-	<div class="col-div-3">
-		<div class="box">
-      {% for item in all %}
-        <p>{{ item.rbc }}</p>
-      {% endfor %} 
-			<p><span>Red Blood Cell</span></p>
-			<i class="fa fa-plus-square box-icon"></i>
-		</div>
-	</div>
-	<div class="col-div-3">
-		<div class="box">
-      {% for item in all %}
-      <p>{{ item.pc }}</p>
-    {% endfor %} 
-			<p><span>Platelet Count</span></p>
-			<i class="fa fa-thermometer box-icon"></i>
-		</div>
-	</div>
-	<div class="col-div-3">
-		<div class="box">
-			<p>78<br/><span>Haemoglobin</span></p>
-			<i class="fa fa-tint box-icon"></i>
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<br/><br/>
-	<div class="col-div-8">
-		<div class="box-8">
-		<div class="content-box">
-			<p>Report Summary </p>
-			<br/>
-			<table>
-  <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  
-  
-</table>
-		</div>
-	</div>
-	</div>
 
-	<div class="col-div-4">
-		<div class="box-4">
-		<div class="content-box">
-			<p>Health Score</p>
 
-			<div class="circle-wrap">
-    <div class="circle">
-      <div class="mask full">
-        <div class="fill"></div>
-      </div>
-      <div class="mask half">
-        <div class="fill"></div>
-      </div>
-      <div class="inside-circle"> 70% </div>
+
+        
+
+
+    <br>
+    
+    
+    <!--learn-->
+    
+    
+       <!--second carousal-->
+       <div class="container text-center my-3">
+        <!-- <h2 class="font-weight-light">Bootstrap 4 - Multi Item Carousel</h2> -->
+        <div class="row mx-auto my-auto">
+            <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+                <div class="carousel-inner w-100" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="col-md-4">
+                            <div class="card">
+                        <img class="card-img-top" src="/images/jyot.jpg" >
+                        <div class="card-body">
+                            {% if all_report %}
+                            <p>{{all_report.pc}}<br/><span>PC</span></p>
+    
+                           {% endif %}
+                            
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-md-4">
+                            <div class="card">
+                        <img class="card-img-top" src="/images/aksharan.jpg" >
+                        <div class="card-body">
+                            {% if all_report %}
+                            <p class="card-tetx">{{all_report.rbc}}<span>RBC</span></p>
+    
+                           {% endif %}
+                            
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-md-4">
+                            <div class="card">
+                        <img class="card-img-top" src="/images/<ruchira.jpg" >
+                        <div class="card-body">
+                            {% if all_report %}
+                            <p class="card-tetx">{{all_report.wbc}}<span>WBC</span></p>
+    
+                           {% endif %}
+                            
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                            <div class="col-md-4">
+                            <div class="card">
+                        <img class="card-img-top" src="/images/Nakul.jpg" >
+                        <div class="card-body">
+                            {% if all_report %}
+                            <p class="card-tetx">{{all_report.hgb}}<span>HGB</span></p>
+    
+                           {% endif %}
+                           
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-md-4">
+                             <div class="card">
+                        <img class="card-img-top" src="/images/sharad.jpg" >
+                        <div class="card-body">
+                            {% if all_report %}
+                            <p class="card-tetx">{{all_report.rcd}}<span>rcd</span></p>
+    
+                           {% endif %}
+                            
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-md-4">
+                            <div class="card card-body">
+                                <img class="img-fluid" src="http://placehold.it/380?text=6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle"
+                        aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle"
+                        aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <h5 class="mt-2">Advances one slide at a time</h5>
     </div>
-  </div>
-		</div>
-	</div>
-	</div>
-		
-	<div class="clearfix"></div>
-</div>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    
+    <!---naverbar-2-->
+    
+    
+    
+    <script>
+        $('#recipeCarousel').carousel({
+            interval: 10000
+        })
+    
+        $('.carousel .carousel-item').each(function () {
+            var minPerSlide = 3;
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+    
+            for (var i = 0; i < minPerSlide; i++) {
+                next = next.next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+    
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+    
+    </script>
+    
+    
+    <style>
+        @media (max-width: 768px) {
+            .carousel-inner .carousel-item>div {
+                display: none;
+            }
+    
+            .carousel-inner .carousel-item>div:first-child {
+                display: block;
+            }
+        }
+    
+        .carousel-inner .carousel-item.active,
+        .carousel-inner .carousel-item-next,
+        .carousel-inner .carousel-item-prev {
+            display: flex;
+        }
+    
+        /* display 3 */
+        @media (min-width: 768px) {
+    
+            .carousel-inner .carousel-item-right.active,
+            .carousel-inner .carousel-item-next {
+                transform: translateX(33.333%);
+            }
+    
+            .carousel-inner .carousel-item-left.active,
+            .carousel-inner .carousel-item-prev {
+                transform: translateX(-33.333%);
+            }
+        }
+    
+        .carousel-inner .carousel-item-right,
+        .carousel-inner .carousel-item-left {
+            transform: translateX(0);
+        }
+    </style>
+    <hr>
+    
+    </div> 
+  
 <script>
 
   $(".nav").click(function(){
@@ -163,226 +257,8 @@ $(".nav2").click(function(){
 
 </script>
 
+
 </body>
 
-<style>
-
-body{
-	margin:0px;
-	padding: 0px;
-	background-color:#1b203d;
-	overflow: hidden;
-	font-family: system-ui;
-}
-.clearfix{
-	clear: both;
-}
-.logo{
-	margin: 0px;
-	margin-left: 28px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 30px;
-}
-.logo span{
-	color: #f7403b;
-}
-.sidenav {
-  height: 100%;
-  width: 300px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #272c4a;
-  overflow: hidden;
-  transition: 0.5s;
-  padding-top: 30px;
-}
-.sidenav a {
-  padding: 15px 8px 15px 32px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-.sidenav a:hover {
-  color: #f1f1f1;
-  background-color:#1b203d;
-}
-.sidenav{
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-}
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
-  margin-left: 300px;
-}
-.head{
-	padding:20px;
-}
-.col-div-6{
-	width: 50%;
-	float: left;
-}
-.profile{
-	/* display: inline-block; */
-	float: right; 
-	width: 160px;
-}
-.pro-img{
-	float: left;
-	width: 40px;
-	margin-top: 5px;
-}
-.profile p{
-	color: white;
-	font-weight: 500;
-	margin-left: 55px;
-	margin-top: 10px;
-	font-size: 13.5px;
-}
-.profile p span{
-	font-weight: 400;
-    font-size: 12px;
-    display: block;
-    color: #8e8b8b;
-}
-.col-div-3{
-	width: 25%;
-	float: left;
-}
-.box{
-	width: 85%;
-	height: 100px;
-	background-color: #272c4a;
-	margin-left: 10px;
-	padding:10px;
-}
-.box p{
-	 font-size: 35px;
-    color: white;
-    font-weight: bold;
-    line-height: 30px;
-    padding-left: 10px;
-    margin-top: 20px;
-    display: inline-block;
-}
-.box p span{
-	font-size: 20px;
-	font-weight: 400;
-	color: #818181;
-}
-.box-icon{
-	font-size: 40px!important;
-    float: right;
-    margin-top: 35px!important;
-    color: #818181;
-    padding-right: 10px;
-}
-.col-div-8{
-	width: 70%;
-	float: left;
-}
-.col-div-4{
-	width: 30%;
-	float: left;
-}
-.content-box{
-	padding: 20px;
-}
-.content-box p{
-	margin: 0px;
-    font-size: 20px;
-    color: #f7403b;
-}
-.content-box p span{
-	float: right;
-    background-color: #ddd;
-    padding: 3px 10px;
-    font-size: 15px;
-}
-.box-8, .box-4{
-	width: 95%;
-	background-color: #272c4a;
-	height: 330px;
-	
-}
-.nav2{
-	display: none;
-}
-
-.box-8{
-	margin-left: 10px;
-}
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  
-}
-td, th {
-  text-align: left;
-  padding:15px;
-  color: #ddd;
-  border-bottom: 1px solid #81818140;
-}
-.circle-wrap {
-  margin: 50px auto;
-  width: 150px;
-  height: 150px;
-  background: #e6e2e7;
-  border-radius: 50%;
-}
-.circle-wrap .circle .mask,
-.circle-wrap .circle .fill {
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  border-radius: 50%;
-}
-.circle-wrap .circle .mask {
-  clip: rect(0px, 150px, 150px, 75px);
-}
-
-.circle-wrap .circle .mask .fill {
-  clip: rect(0px, 75px, 150px, 0px);
-  background-color: #f7403b;
-}
-.circle-wrap .circle .mask.full,
-.circle-wrap .circle .fill {
-  animation: fill ease-in-out 3s;
-  transform: rotate(126deg);
-}
-
-@keyframes fill {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(126deg);
-  }
-}
-.circle-wrap .inside-circle {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background: #fff;
-  line-height: 130px;
-  text-align: center;
-  margin-top: 10px;
-  margin-left: 10px;
-  position: absolute;
-  z-index: 100;
-  font-weight: 700;
-  font-size: 2em;
-}
-
-</style>
 
 </html>
-
