@@ -27,6 +27,7 @@ urlpatterns = [
 	# path('sign/', views.sign, name="sign"),
 	path('logout/',views.logout_view,name='logout'),
     path('about/',views.about,name='about'),
+      path('report/',views.report,name='report'),
  	path('FILE/',views.FILE,name='FILE'),
   path('dashboard/',views.dashboard,name='dashboard'),
   

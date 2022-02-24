@@ -38,6 +38,13 @@ def homebefore(request):
 def about(request):
 	return render(request,'accounts/about.html')
 
+def report(request):
+    name=request.user.username or None
+    r=FILE()
+    print(r)
+    return render(request,'accounts/report.html',{'name':name})
+
+
 
 
 def registerPage(request):

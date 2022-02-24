@@ -21,30 +21,36 @@
 
 
 <body>
+    <div class="containers">
+		<div class="navbar">
 
-	<div id="mySidenav" class="sidenav">
-	<p class="logo">DoCure</p>
-  <a href="dashboard.html" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
-  <a href="home.html"class="icon-a"><i class="fa fa-home icons"></i> &nbsp;&nbsp;Home</a>
-  <a href="about.html"class="icon-a"><i class="fa fa-info icons"></i> &nbsp;&nbsp;About Us</a>
-  <a href="#"class="icon-a"><i class="fa fa-id-card icons"></i> &nbsp;&nbsp;Feedback</a>
+			<a class="navbar-brand" <a href="{% url 'home' %}"><img src='{% static 'images/Logo.jpeg' %}' width="120"
+				height="60"></a>
+		   
+			{% if user.is_authenticated %}
+			{% csrf_token %}
+			<nav>
+				<ul>
+					<li><a href="">HOME</a></li>
+					<li><a href="/dashboard/">DASHBOARD</a></li>
+					<li><a  href="/FILE/">Upload</a></li>
+					
+					<li style="color:white">{{name}}</li>
+					<li><a  href="/logout/">Logout</a></li>
+					
+      {% endif %}
+				
+				</ul>
 
-</div>
+			</nav>
+
+		</div>
+	
 <div id="main">
 	
 
-	<div class="head">
-		<div class="col-div-6">
-<span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >&#9776; Dashboard</span>
-<span style="font-size:30px;cursor:pointer; color: white;" class="nav2"  >&#9776; Dashboard</span>
-</div>
 	
-	<div class="col-div-5">
-	<div class="profile">
-		<p>{{name}}</p>
-		<p><a  href="/logout/">Logout</a></p>
-	</div>
-</div>
+	
 	<div class="clearfix"></div>
 </div> 
 
@@ -67,12 +73,12 @@
             <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
                 <div class="carousel-inner w-100" role="listbox">
                     <div class="carousel-item active">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card">
-                        <img class="card-img-top" src="/images/jyot.jpg" >
+                    
                         <div class="card-body">
                             {% if all_report %}
-                            <p>{{all_report.pc}}<br/><span>PC</span></p>
+                            <p ><font size="+2">{{all_report.pc}}</font><br/><br/><span><font size="+2">Platelet Count</font></bold></span></p>
     
                            {% endif %}
                             
@@ -83,10 +89,11 @@
                     <div class="carousel-item">
                         <div class="col-md-4">
                             <div class="card">
-                        <img class="card-img-top" src="/images/aksharan.jpg" >
+                     
                         <div class="card-body">
                             {% if all_report %}
-                            <p class="card-tetx">{{all_report.rbc}}<span>RBC</span></p>
+                            <p ><font size="+2">{{all_report.rbc}}</font><br/><br/><span><font size="+2">RED BLOOD CELLS</font></bold></span></p>
+    
     
                            {% endif %}
                             
@@ -97,10 +104,10 @@
                     <div class="carousel-item">
                         <div class="col-md-4">
                             <div class="card">
-                        <img class="card-img-top" src="/images/<ruchira.jpg" >
                         <div class="card-body">
                             {% if all_report %}
-                            <p class="card-tetx">{{all_report.wbc}}<span>WBC</span></p>
+                            <p ><font size="+2">{{all_report.wbc}}</font><br/><br/><span><font size="+2">WHITE BLOOD CELLS</font></bold></span></p>
+    
     
                            {% endif %}
                             
@@ -111,10 +118,10 @@
                     <div class="carousel-item">
                             <div class="col-md-4">
                             <div class="card">
-                        <img class="card-img-top" src="/images/Nakul.jpg" >
+                   
                         <div class="card-body">
                             {% if all_report %}
-                            <p class="card-tetx">{{all_report.hgb}}<span>HGB</span></p>
+                            <p ><font size="+2">{{all_report.hgb}}</font><br/><br/><span><font size="+2">HEMOGLOBIN</font></bold></span></p>
     
                            {% endif %}
                            
@@ -125,10 +132,11 @@
                     <div class="carousel-item">
                         <div class="col-md-4">
                              <div class="card">
-                        <img class="card-img-top" src="/images/sharad.jpg" >
+                     
                         <div class="card-body">
                             {% if all_report %}
-                            <p class="card-tetx">{{all_report.rcd}}<span>rcd</span></p>
+                            <p ><font size="+2">{{all_report.pc}}</font><br/><br/><span><font size="+2">Platelet Count</font></bold></span></p>
+    
     
                            {% endif %}
                             
@@ -139,7 +147,12 @@
                     <div class="carousel-item">
                         <div class="col-md-4">
                             <div class="card card-body">
-                                <img class="img-fluid" src="http://placehold.it/380?text=6">
+                                {% if all_report %}
+                                <p ><font size="+2">{{all_report.pc}}</font><br/><br/><span><font size="+2">Platelet Count</font></bold></span></p>
+        
+        
+                               {% endif %}
+                               
                             </div>
                         </div>
                     </div>
@@ -191,6 +204,67 @@
     
     
     <style>
+        *{
+			margin: 0;
+			padding: 0;
+			font-family: 'Roboto', sans-serif;
+		}
+		.containers{
+			width:100%;
+			height: 100vh;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0,0,0,0.7)),url("{% static 'images/BG.jpg' %}");
+			background-size: cover;
+			background-size: cover;
+			padding-left: 8%;
+			padding-right: 8%;
+			box-sizing: border-box;
+		}
+		.navbar{
+			height: 12%;
+			display:flex;
+			align-items: center;
+		}
+		.logo{
+			width:50px;
+			cursor: pointer;
+		}
+		.menu-icon{
+			width:30px;
+			cursor: pointer;
+			margin-left: 40px;
+		}
+		nav{
+			flex: 1;
+			text-align: right;
+		}
+		nav ul li{
+			list-style: none;
+			display: inline-block;
+			margin-left: 60px;
+		}
+		nav ul li a{
+			text-decoration: none;
+			color: #fff;
+			font-size: 13px;
+		}
+		.row{
+			display: flex;
+			height: 88%;
+			align-items: center;
+		}
+		.col{
+			flex-basis: 50%;
+		}
+		h1{
+			color: black;
+			font-size: 100px;
+		}
+		
+		p{
+			color: black;
+			font-size: 11px;
+			line-height: 15px;
+		}
         @media (max-width: 768px) {
             .carousel-inner .carousel-item>div {
                 display: none;
