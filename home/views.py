@@ -40,9 +40,8 @@ def about(request):
 
 def report(request):
     name=request.user.username or None
-    r=FILE()
-    print(r)
-    return render(request,'accounts/report.html',{'name':name})
+   
+    return render(request,'accounts/report.html',{'name':name},)
 
 
 
@@ -222,8 +221,6 @@ def FILE(request):
         name = fs.save(uploaded_file.name, uploaded_file)
         print(type(uploaded_file.name))
         context['url'] = fs.url(name)
-        
-        print(uploaded_file)
         if(uploaded_file.name.endswith(".pdf")):
             rbc, wbc, pc,hgb,rcd,mchc,mpv,pcv,mcv = GetInfo(uploaded_file)
             user = request.user.get_username()
